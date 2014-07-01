@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>GuestChat</title>
+  <title>五倍紅寶石課用匿名聊天室</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link data-turbolinks-track="true" rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/tomorrow-night.min.css">
+  <script data-turbolinks-track="true" src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <%= render 'layouts/navbar' %>
+  <div class="container-fluid">
+    <%= yield %>
+  </div>
 </body>
 </html>

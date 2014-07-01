@@ -28,6 +28,8 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    bootstrap-sass (3.2.0.0)
+      sass (~> 3.2)
     builder (3.2.2)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -74,6 +76,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
+    rdiscount (2.1.7.1)
     rdoc (4.1.1)
       json (~> 1.4)
     sass (3.2.19)
@@ -113,11 +116,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass
   coffee-rails (~> 4.0.0)
   jbuilder (~> 2.0)
   jquery-rails
   pg
   rails (= 4.1.2)
+  rdiscount
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   spring
