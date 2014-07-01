@@ -9,7 +9,7 @@ set :bundle_binstubs, false
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/home/rails/guest_chat'
+set :deploy_to, '/home/rails/guest-chat'
 
 # Default value for :scm is :git
 # set :scm, :git

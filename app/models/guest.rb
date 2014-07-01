@@ -1,5 +1,5 @@
 class Guest < ActiveRecord::Base
-  has_many :messages
+  has_many :messages, dependent: :destroy
   after_initialize :init_name, unless: :name
 
   private
