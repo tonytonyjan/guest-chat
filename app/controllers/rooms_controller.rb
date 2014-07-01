@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find_by(slug: params[:id])
+    @room = Room.find_or_create_by(slug: params[:id])
     @message = Message.new
   end
 end

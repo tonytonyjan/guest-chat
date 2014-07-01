@@ -8,7 +8,7 @@ $(document).on 'page:change', () ->
     $(this.form).submit() if e.which == 13 && !e.shiftKey
   # max height
   set_height = () ->
-    $('#messages').height window.innerHeight-110
+    $('#messages').height window.innerHeight-150
   set_height()
   window.addEventListener('resize', set_height)
   # pulling

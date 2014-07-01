@@ -1,6 +1,6 @@
 class Room < ActiveRecord::Base
   has_many :messages
-  after_initialize :gen_slug, if: :new_record?
+  after_initialize :gen_slug, unless: :slug
 
   def to_param
     slug
