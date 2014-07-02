@@ -6,6 +6,7 @@ $(document).on 'page:change', () ->
     alert('出錯了')
   $("#message_content").keypress (e) ->
     $(this.form).submit() if e.which == 13 && !e.shiftKey
+  .focus()
   # max height
   set_height = () ->
     $('#messages').height window.innerHeight-150
@@ -16,7 +17,7 @@ $(document).on 'page:change', () ->
     $.ajax
       url: '/rooms/' + $('#room').data('slug') + '/messages.json'
       data:
-        read_message_ids: (message.getAttribute('data-message-id') for message in $('.message'))
+        last_read_message_id: $('.message:last-child').data('message-id')
     .done (messages) ->
       scroll_flag = false
       is_btm = $('#messages').height() + $('#messages').scrollTop() >= $('#messages')[0].scrollHeight - 10
