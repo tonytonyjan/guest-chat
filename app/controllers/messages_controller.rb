@@ -1,10 +1,10 @@
 class MessagesController < ApplicationController
   before_action :set_room
   def index
-    @messages = if last_message = @room.messages.find_by(id: params[:last_read_message_id])
-       @room.messages.where('id > ?', last_message.id)
+    if last_message = @room.messages.find_by(id: params[:last_read_message_id])
+      @messages = @room.messages.where('id > ?', last_message.id)
     else
-       @room.messages
+      @messages = @room.messages
     end
   end
 
