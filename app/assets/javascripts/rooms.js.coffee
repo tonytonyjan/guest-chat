@@ -28,5 +28,5 @@ $(document).on 'page:change', () ->
         code_block = $('[data-message-id="'+message.id+'"] pre code')[0]
         hljs.highlightBlock code_block if code_block
       $('#messages').scrollTop($('#messages')[0].scrollHeight) if scroll_flag && is_btm
-    setTimeout(pull_messages, 1000)
+      setTimeout(pull_messages, 1000)
   pull_messages()
