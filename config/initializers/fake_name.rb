@@ -1,0 +1,1 @@
+require 'fake_name'
