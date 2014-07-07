@@ -1,4 +1,4 @@
-if !WebSocket
+if typeof(WebSocket) == 'undefined'
   $(document).on 'page:change', () ->
     # send message
     $('#new_message').on 'ajax:success', (event, message) ->

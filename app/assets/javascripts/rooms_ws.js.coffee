@@ -1,4 +1,4 @@
-if WebSocket
+if typeof(WebSocket) != 'undefined'
   $(document).on 'page:change', () ->
     websocket = null
     token = $('#current_guest').data('token')
