@@ -1,5 +1,5 @@
 <div id="room" data-slug="<%= @room.slug %>"></div>
-<div id="current_guest" data-id="<%= current_guest.id %>"></div>
+<div id="current_guest" data-id="<%= current_guest.id %>" data-token="<%= @token %>"></div>
 <div id="messages" class="container-fluid"></div>
 <%= form_for [@room, @message], remote: true do |f| %>
   <div class="input-group input-group-lg">
