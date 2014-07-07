@@ -5,7 +5,7 @@ $(document).on 'page:change', () ->
   .on 'ajax:error', () ->
     alert('出錯了')
   $("#message_content").keypress (e) ->
-    $(this.form).submit() if e.which == 13 && !e.shiftKey
+    $(this.form).submit() if e.which == 13 && !e.shiftKey && $('#message_content').val().trim().length > 0
   .focus()
   pull_messages = () ->
     $.ajax
