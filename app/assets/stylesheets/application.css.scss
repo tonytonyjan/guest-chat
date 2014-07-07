@@ -26,6 +26,9 @@ body { padding-top: 70px; }
 .message .name{
   font-size: 16px;
 }
+.message p{
+  word-break: break-all;
+}
 .new_message{
   position: fixed;
   bottom: 20px;
