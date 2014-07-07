@@ -7,12 +7,6 @@ $(document).on 'page:change', () ->
   $("#message_content").keypress (e) ->
     $(this.form).submit() if e.which == 13 && !e.shiftKey
   .focus()
-  # max height
-  # set_height = () ->
-  #   $('#messages').height window.innerHeight-150
-  # set_height()
-  # window.addEventListener('resize', set_height)
-  # pulling
   pull_messages = () ->
     $.ajax
       url: '/rooms/' + $('#room').data('slug') + '/messages.json'
