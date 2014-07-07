@@ -40,4 +40,5 @@ gem 'capistrano-rails', group: :development
 
 gem 'bootstrap-sass'
 gem 'rdiscount'
-gem 'whenever', :require => false
+gem 'whenever', require: false
+gem 'em-websocket', require: false
