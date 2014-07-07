@@ -15,6 +15,20 @@
  */
 body { padding-top: 70px; }
 #messages{
-  overflow: scroll;
+  overflow-y: scroll;
   font-size: 200%;
+  position: absolute;
+  top: 60px;
+  bottom: 100px;
+  left: 0;
+  right: 0;
+}
+.message .name{
+  font-size: 16px;
+}
+.new_message{
+  position: fixed;
+  bottom: 20px;
+  left: 15px;
+  right: 15px;
 }

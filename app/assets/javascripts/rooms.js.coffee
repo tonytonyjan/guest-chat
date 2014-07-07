@@ -8,10 +8,10 @@ $(document).on 'page:change', () ->
     $(this.form).submit() if e.which == 13 && !e.shiftKey
   .focus()
   # max height
-  set_height = () ->
-    $('#messages').height window.innerHeight-150
-  set_height()
-  window.addEventListener('resize', set_height)
+  # set_height = () ->
+  #   $('#messages').height window.innerHeight-150
+  # set_height()
+  # window.addEventListener('resize', set_height)
   # pulling
   pull_messages = () ->
     $.ajax
@@ -24,7 +24,7 @@ $(document).on 'page:change', () ->
       for message in messages
         scroll_flag = true
         color = if message.guest.id == $('#current_guest').data('id') then 'warning' else 'primary'
-        $('#messages').append('<div class="row message" data-message-id="'+message.id+'"> <div class="col-sm-2"> <span class="label label-'+color+'">'+message.guest.name+'</span> </div> <div class="col-sm-10">'+message.content+'</div> </div>')
+        $('#messages').append('<div class="row message" data-message-id="'+message.id+'"> <div class="col-sm-2"> <span class="name label label-'+color+'">'+message.guest.name+'</span> </div> <div class="col-sm-10">'+message.content+'</div> </div>')
         code_block = $('[data-message-id="'+message.id+'"] pre code')[0]
         hljs.highlightBlock code_block if code_block
       $('#messages').scrollTop($('#messages')[0].scrollHeight) if scroll_flag && is_btm
