@@ -54,6 +54,7 @@ namespace :deploy do
       #   execute :rake, 'cache:clear'
       # end
     end
+    execute :sudo, :god, 'restart guest-chat'
   end
 
 end

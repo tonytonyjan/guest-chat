@@ -3,7 +3,7 @@ if WebSocket
     websocket = null
     token = $('#current_guest').data('token')
     start = () ->
-      websocket = new WebSocket('ws://localhost:9527/' + $('#room').data('slug'));
+      websocket = new WebSocket('ws://' + document.location.hostname + ':9527/' + $('#room').data('slug'));
       websocket.onclose = () ->
         setTimeout start, 5000 # reconnect in 5 seconds
       websocket.onopen = () ->
