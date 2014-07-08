@@ -1,13 +1,12 @@
 if typeof(WebSocket) != 'undefined'
   $(document).on 'page:change', () ->
     websocket = null
-    token = $('#current_guest').data('token')
     start = () ->
-      websocket = new WebSocket('ws://' + document.location.hostname + ':9527/' + $('#room').data('slug'));
+      websocket = new WebSocket('ws://' + document.location.hostname + ':9527/' + $('#room').data('slug') + '?' + $('#current_guest').data('token'));
       websocket.onclose = () ->
         setTimeout start, 5000 # reconnect in 5 seconds
       websocket.onopen = () ->
-        websocket.send JSON.stringify op: 'sign_in', last_read: $('.message:last-child').data('message-id'), token: token
+        websocket.send JSON.stringify op: 'messages', last_read: $('.message:last-child').data('message-id')
       websocket.onmessage = (event) ->
         data = JSON.parse event.data
         switch data.op
@@ -33,5 +32,5 @@ if typeof(WebSocket) != 'undefined'
             $('#messages').scrollTop($('#messages')[0].scrollHeight) if is_btm
     start()
     $("#message_content").keypress (e) ->
-      websocket.send(JSON.stringify(op: 'messages:create', content: this.value, token: token)) if e.which == 13 && !e.shiftKey && $('#message_content').val().trim().length > 0
+      websocket.send(JSON.stringify(op: 'messages:create', content: this.value)) if e.which == 13 && !e.shiftKey && $('#message_content').val().trim().length > 0
     .focus()
