@@ -53,7 +53,7 @@ namespace :deploy do
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
-      execute :sudo, :god, 'restart guest-chat'
+      # execute :sudo, :god, 'restart guest-chat'
     end
   end
 
