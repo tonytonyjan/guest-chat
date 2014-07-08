@@ -5,13 +5,13 @@ EM.run do
   @channels = {}
   EM::WebSocket.run(host: '0.0.0.0', port: 9527) do |ws|
     ws.onopen do |handshake|
-      room = Room.find_by! slug: handshake.path.sub('/', '')
-      guest = Guest.find(@verifier.verify handshake.query_string)
-      @channels[room.slug] ||= EM::Channel.new
-      channel = @channels[room.slug]
-      sid = channel.subscribe { |msg| ws.send msg } # for unsubscribing while closing
-      ws.onmessage do |msg|
-        begin
+      begin
+        room = Room.find_by! slug: handshake.path.sub('/', '')
+        guest = Guest.find(@verifier.verify handshake.query_string)
+        @channels[room.slug] ||= EM::Channel.new
+        channel = @channels[room.slug]
+        sid = channel.subscribe { |msg| ws.send msg } # for unsubscribing while closing
+        ws.onmessage do |msg|
           params = JSON msg
           case params['op']
           when 'messages'
@@ -34,14 +34,14 @@ EM.run do
             ws.send({op: (message.save ? :ok : :error)}.to_json)
             channel.push({op: :message, id: message.id, content: RDiscount.new(message.content, :autolink).to_html, guest: {id: guest.id, name: guest.name}}.to_json)
           end
-        rescue
-          puts $!.inspect, $@
         end
-      end
 
-      ws.onclose do
-        channel.unsubscribe(sid)
-        @channels.delete(room.slug) if channel.instance_variable_get(:@subs).empty?
+        ws.onclose do
+          channel.unsubscribe(sid)
+          @channels.delete(room.slug) if channel.instance_variable_get(:@subs).empty?
+        end
+      rescue
+        puts $!.inspect, $@
       end
     end # ws.onopen
   end # EM::WebSocket.run
