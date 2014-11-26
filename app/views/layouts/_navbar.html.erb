@@ -14,8 +14,51 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <li><a href="#" data-toggle="modal" data-target="#modal_about">代表色</a></li>
+      </ul>
+      <ul class="nav navbar-nav pull-right">
         <li><a href="http://5xruby.tw" target="_blank">回五倍</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<div class="modal fade" id="modal_about" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">關閉</span></button>
+        <h4 class="modal-title" id="myModalLabel">代表色</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>代表色</th><th>切換方式</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="2"><h1><span class="label label-warning">自己</span></h1></td>
+            </tr>
+            <tr>
+              <td><h1><span class="label label-primary">學生</span></h1></td>
+              <td><h1><code>/role student</code></h1></td>
+            </tr>
+            <tr>
+              <td><h1><span class="label label-success">助教</span></h1></td>
+              <td><h1><code>/role assistant</code></h1></td>
+            </tr>
+            <tr>
+              <td><h1><span class="label label-danger">老師</span></h1></td>
+              <td><h1><code>/role teacher</code></h1></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+      </div>
+    </div>
+  </div>
+</div>
