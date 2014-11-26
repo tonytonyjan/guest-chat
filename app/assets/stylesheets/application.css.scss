@@ -11,8 +11,9 @@
  * file per style scope.
  *
  *= require_tree .
- *= require bootstrap
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
 body { padding-top: 70px; }
 #messages{
   overflow-y: scroll;
