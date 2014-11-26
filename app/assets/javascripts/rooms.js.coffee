@@ -12,16 +12,15 @@ $(document).on 'page:change', () ->
         this.disabled = true
     .focus()
   pull_messages = () ->
-    $.get '/rooms/' + $('#room').data('slug') + '/messages.json', last_read_message_id: $('.message:last-child').data('message-id')
-    .done (messages) ->
+    last_read_message_id = $('.message:last-child').attr('id') && $('.message:last-child').attr('id').match(/\d+$/)[0]
+    $.get '/rooms/' + $('#room').data('slug') + '/messages', last_read_message_id: last_read_message_id
+    .done (raw_html) ->
       scroll_flag = false
       is_btm = $('#messages').height() + $('#messages').scrollTop() >= $('#messages')[0].scrollHeight - 10
-      for message in messages
-        scroll_flag = true
-        color = if message.guest.id == $('#current_guest').data('id') then 'warning' else 'primary'
-        $('#messages').append('<div class="row message" data-message-id="'+message.id+'"> <div class="col-sm-2"> <span class="name label label-'+color+'">'+message.guest.name+'</span> </div> <div class="col-sm-10">'+message.content+'</div> </div>')
-        code_block = $('[data-message-id="'+message.id+'"] pre code')[0]
-        hljs.highlightBlock code_block if code_block
+      jquery_html = $(raw_html)
+      scroll_flag = true if raw_html
+      hljs.highlightBlock code_block for code_block in jquery_html.find('pre code')
+      $('#messages').append(jquery_html)
       $('#messages').scrollTop($('#messages')[0].scrollHeight) if scroll_flag && is_btm
     .always () -> setTimeout(pull_messages, 1000)
   pull_messages()

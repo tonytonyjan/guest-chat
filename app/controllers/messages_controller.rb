@@ -6,6 +6,7 @@ class MessagesController < ApplicationController
     else
       @messages = @room.messages
     end
+    render layout: nil
   end
 
   def create
