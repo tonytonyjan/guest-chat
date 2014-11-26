@@ -1,9 +1,11 @@
 $(document).on 'page:change', () ->
   # send message
   $('#new_message')
-    .on 'ajax:success', (event, message) -> $('#message_content').val('')
+    .on 'ajax:success', (event, data) ->
+      $('#message_content').val('')
+      alert(data.msg) if data.msg
     .on 'ajax:error', () -> alert('出錯了')
-    .on 'ajax:complete', () -> $('#message_content').attr('disabled', false)
+    .on 'ajax:complete', () -> $('#message_content').attr('disabled', false).focus()
   $("#message_content")
     .keypress (e) ->
       if e.which == 13 && !e.shiftKey && $('#message_content').val().trim().length > 0
