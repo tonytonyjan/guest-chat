@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20160905184243) do
   enable_extension "plpgsql"
 
   create_table "guests", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,9 +32,10 @@ ActiveRecord::Schema.define(version: 20160905184243) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string   "slug"
+    t.string   "slug",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_rooms_on_slug", unique: true, using: :btree
   end
 
   add_foreign_key "messages", "guests"
