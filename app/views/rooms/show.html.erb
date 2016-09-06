@@ -1,1 +1,37 @@
-Hi! Guest <%= current_guest.name %>, you are in room <%= @room.slug %>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title">匿名寮 &gt; <%= @room.slug %></span>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <div class="mdl-list">
+      <% @guests.each do |guest| %>
+      <div class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          <!-- <img src="<%= guest.avatar %>" class="mdl-list__item-avatar"> -->
+          <span><%= guest.name %></span>
+        </span>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <main id="main" class="mdl-layout__content">
+    <div class="page-content">
+      <ul id="messages" class="mdl-list"></ul>
+    </div>
+  </main>
+  <form class="submit-form">
+    <div class="submit-form__text-field">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">
+        <textarea class="mdl-textfield__input" type="text" rows="1" id="message" autofocus style="resize: none"></textarea>
+        <label class="mdl-textfield__label" for="message">在這裡輸入訊息⋯⋯</label>
+      </div>
+    </div>
+    <div class="submit-form__send-button">
+      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
+        <i class="material-icons">send</i>
+      </button>
+    </div>
+  </form>
+</div>

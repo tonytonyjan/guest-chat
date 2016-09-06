@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
 
   def current_guest
     @guest ||= (
-      guest = Guest.find_or_create_by!(id: session[:guest_id])
-      session[:guest_id] = guest.id
+      guest = Guest.find_or_create_by!(id: cookies.signed[:guest_id])
+      cookies.signed[:guest_id] = guest.id
       guest
     )
   end

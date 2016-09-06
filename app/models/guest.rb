@@ -5,6 +5,10 @@ class Guest < ApplicationRecord
   has_many :messages, dependent: :destroy
   after_initialize :gen_name, unless: :name?
 
+  def avatar
+    "https://api.adorable.io/avatars/40/#{URI::encode(name)}"
+  end
+
   private
 
   def gen_name
