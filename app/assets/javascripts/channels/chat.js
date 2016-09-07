@@ -12,7 +12,13 @@ App.chat = App.cable.subscriptions.create({
   received: function(data) {
     if(!Array.isArray(data)) data = [data]
     var html = data.map(function(msg){
-      return JST['templates/message'](msg)
+      return JST['templates/message']({
+        name: msg.name,
+        avatar: msg.avatar,
+        content: msg.content,
+        time: msg.created_at,
+        timeFromNow: moment(msg.created_at).fromNow()
+      })
     }).reduce(function(previous, current){
       return previous + current
     })

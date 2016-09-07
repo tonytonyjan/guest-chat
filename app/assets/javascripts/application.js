@@ -3,6 +3,7 @@
 //= require turbolinks
 //= require material-design-lite/material
 //= require moment/moment
+//= require moment/locale/zh-tw.js
 //= require_tree ./templates
 //= require cable
 
@@ -14,6 +15,8 @@ document.addEventListener('DOMContentLoaded', function(){
   $form.addEventListener('submit', handleSubmit.bind(this))
   $textArea.addEventListener('input', handleInput.bind(this))
   $textArea.addEventListener('keypress', handleKeyPress.bind(this))
+
+  setInterval(updateTime, 5)
 
   function handleSubmit(){
     e.preventDefault()
@@ -36,5 +39,11 @@ document.addEventListener('DOMContentLoaded', function(){
   function sendMessage(){
     App.chat.send({ content: $textArea.value })
     $textArea.value = ''
+  }
+
+  function updateTime(){
+    for (var time of document.querySelectorAll('[data-time]')) {
+      time.childNodes[0].nodeValue = moment(time.dataset.time).fromNow()
+    }
   }
 })
