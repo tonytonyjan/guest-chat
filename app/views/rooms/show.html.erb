@@ -5,16 +5,7 @@
     </div>
   </header>
   <div class="mdl-layout__drawer">
-    <div class="mdl-list">
-      <% @guests.each do |guest| %>
-      <div class="mdl-list__item">
-        <span class="mdl-list__item-primary-content">
-          <!-- <img src="<%= guest.avatar %>" class="mdl-list__item-avatar"> -->
-          <span><%= guest.name %></span>
-        </span>
-      </div>
-      <% end %>
-    </div>
+    <div id="guests" class="mdl-list"></div>
   </div>
   <main id="main" class="mdl-layout__content">
     <div class="page-content">

@@ -30,8 +30,4 @@ class ChatChannel < ApplicationCable::Channel
     end
     transmit(data) unless data.empty?
   end
-
-  def current_room
-    @current_room ||= Room.find_by slug: params[:room]
-  end
 end

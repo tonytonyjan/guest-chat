@@ -1,4 +1,4 @@
-room = decodeURIComponent(window.location.pathname.match(/^\/([^/]+)/)[1])
+var room = decodeURIComponent(window.location.pathname.match(/^\/([^/]+)/)[1])
 App.chat = App.cable.subscriptions.create({
   channel: 'ChatChannel',
   room: room
