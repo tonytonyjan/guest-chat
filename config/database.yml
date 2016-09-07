@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: guest-chat_production
-  username: guest-chat
-  password: <%= ENV['GUEST-CHAT_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
