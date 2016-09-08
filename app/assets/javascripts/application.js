@@ -36,7 +36,9 @@ componentHandler.registerUpgradedCallback('MaterialLayout', function(e){
   }
 
   function sendMessage(){
-    App.chat.send({ content: $textArea.value })
+    var trimed = $textArea.value.trim()
+    if(trimed.length == 0) return
+    App.chat.send({ content: trimed })
     $textArea.value = ''
   }
 
