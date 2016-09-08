@@ -1,6 +1,5 @@
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require material-design-lite/material
 //= require moment/moment
 //= require moment/locale/zh-tw.js
