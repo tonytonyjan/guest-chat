@@ -3,6 +3,7 @@
 //= require material-design-lite/material
 //= require moment/moment
 //= require moment/locale/zh-tw.js
+//= require markdown/lib/markdown
 //= require_tree ./templates
 //= require cable
 
