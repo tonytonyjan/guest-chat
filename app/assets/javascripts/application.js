@@ -17,7 +17,7 @@ componentHandler.registerUpgradedCallback('MaterialLayout', function(e){
 
   setInterval(updateTime, 5)
 
-  function handleSubmit(){
+  function handleSubmit(e){
     e.preventDefault()
     sendMessage()
   }
