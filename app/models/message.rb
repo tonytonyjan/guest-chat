@@ -1,6 +1,6 @@
 class Message < ApplicationRecord
-  belongs_to :guest
-  belongs_to :room
+  belongs_to :guest, touch: true
+  belongs_to :room, touch: true
   after_commit :broadcast, on: :create
 
   private

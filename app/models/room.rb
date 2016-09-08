@@ -1,5 +1,5 @@
 class Room < ApplicationRecord
-  has_many :messages
+  has_many :messages, dependent: :destroy
   after_initialize :gen_slug, unless: :slug?
 
   def to_param
