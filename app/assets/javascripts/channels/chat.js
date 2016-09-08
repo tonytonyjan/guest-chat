@@ -12,24 +12,47 @@ componentHandler.registerUpgradedCallback('MaterialLayout', function(e){
       console.debug('disconnected')
     },
     received: function(data) {
-      if(!Array.isArray(data)) data = [data]
-      var html = data.map(function(msg){
-        return JST['templates/message']({
-          name: msg.name,
-          avatar: msg.avatar,
-          content: msg.content,
-          time: msg.created_at,
-          timeFromNow: moment(msg.created_at).fromNow(),
-          is_me: msg.guest_id == guest_id
+      if(Array.isArray(data)){
+        var html = data.map(this.msg_to_s).reduce(function(previous, current){
+          return previous + current
         })
-      }).reduce(function(previous, current){
-        return previous + current
-      })
-      var template = document.createElement('template')
-      template.innerHTML = html
-      document.getElementById('messages').appendChild(template.content)
+        this.append_message_from_html(html)
+      }else{
+        Notification.requestPermission(function(permission) {
+          if(permission === 'granted' && guest_id != data.guest_id){
+            new Notification(data.name, {
+              body: data.content,
+              icon: data.avatar,
+              tag: data.name,
+              renotify: true
+            })
+          }
+        })
+        var html = this.msg_to_s(data)
+        this.append_message_from_html(html)
+      }
       var main = document.getElementById('main')
       main.scrollTop = main.scrollHeight
+    },
+    msg_to_s: function(msg){
+      return JST['templates/message']({
+        name: msg.name,
+        avatar: msg.avatar,
+        content: msg.content,
+        time: msg.created_at,
+        timeFromNow: moment(msg.created_at).fromNow(),
+        is_me: msg.guest_id == guest_id
+      })
+    },
+    html_to_ele: function(html){
+      var template = document.createElement('template')
+      template.innerHTML = html
+      return template.content
+    },
+    append_message_from_html: function(html){
+      var dom = this.html_to_ele(html)
+      var template = document.createElement('template')
+      document.getElementById('messages').appendChild(dom)
     }
   })
 })
