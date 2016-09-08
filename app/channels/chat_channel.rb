@@ -10,24 +10,34 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-    Message.create!(
+    message = Message.create!(
       content: data['content'],
       guest: current_guest,
       room: current_room
     )
+    broadcast_message message
   end
 
   private
 
   def transmit_history
     data = current_room.messages.order(:created_at).includes(:guest).map do |message|
-      {
-        name: message.guest.name,
-        avatar: message.guest.avatar,
-        content: message.content,
-        created_at: message.created_at
-      }
+      data_from_message(message)
     end
     transmit(data) unless data.empty?
+  end
+
+  def broadcast_message(message)
+    ActionCable.server.broadcast("chat_#{current_room.slug}", data_from_message(message))
+  end
+
+  def data_from_message(message)
+    {
+      guest_id: message.guest.id,
+      name: message.guest.name,
+      avatar: message.guest.avatar,
+      content: message.content,
+      created_at: message.created_at
+    }
   end
 end

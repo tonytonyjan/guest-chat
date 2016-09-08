@@ -6,7 +6,7 @@
 //= require_tree ./templates
 //= require cable
 
-document.addEventListener('DOMContentLoaded', function(){
+componentHandler.registerUpgradedCallback('MaterialLayout', function(e){
   var $form = document.querySelector('.submit-form')
   var $textArea = $form.querySelector('textarea')
   var $main = document.getElementById('main')

@@ -22,3 +22,8 @@
     margin-left: 0;
   }
 }
+
+.message-self {
+  color: unquote("rgb(#{$palette-blue-800})");
+  font-weight: bold;
+}
