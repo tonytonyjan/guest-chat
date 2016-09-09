@@ -16,7 +16,7 @@ componentHandler.registerUpgradedCallback('MaterialLayout', function(e){
   $textArea.addEventListener('input', handleInput.bind(this))
   $textArea.addEventListener('keypress', handleKeyPress.bind(this))
 
-  setInterval(updateTime, 5)
+  setInterval(updateTime, 5000)
 
   function handleSubmit(e){
     e.preventDefault()
