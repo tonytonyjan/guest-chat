@@ -51,7 +51,6 @@ componentHandler.registerUpgradedCallback('MaterialLayout', function(e){
     },
     append_message_from_html: function(html){
       var dom = this.html_to_ele(html)
-      var template = document.createElement('template')
       document.getElementById('messages').appendChild(dom)
     }
   })
