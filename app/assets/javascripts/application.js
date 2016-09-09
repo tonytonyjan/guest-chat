@@ -44,7 +44,9 @@ componentHandler.registerUpgradedCallback('MaterialLayout', function(e){
   }
 
   function updateTime(){
-    for (var time of document.querySelectorAll('[data-time]')) {
+    var list = document.querySelectorAll('[data-time]')
+    for (var i = 0; i < list.length; i++) {
+      var time = list[i]
       time.childNodes[0].nodeValue = moment(time.dataset.time).fromNow()
     }
   }
