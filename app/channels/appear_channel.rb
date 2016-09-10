@@ -1,6 +1,6 @@
 # Be sure to restart your server when you modify this file. Action Cable runs in a loop that does not support auto reloading.
 class AppearChannel < ApplicationCable::Channel
-  @guests = []
+  @guests = {}
 
   class << self
     attr_reader :guests
@@ -9,11 +9,12 @@ class AppearChannel < ApplicationCable::Channel
   def subscribed
     stream_from broadcasting_name
     transmit_online_guests
-    self.class.guests << current_guest
+    guests << current_guest
   end
 
   def unsubscribed
-    self.class.guests.delete current_guest
+    guests.delete current_guest
+    self.class.guests.delete broadcasting_name if guests.empty?
     broadcast_appearance({'on' => 'delete'})
   end
 
@@ -35,12 +36,16 @@ class AppearChannel < ApplicationCable::Channel
 
   private
 
+  def guests
+    self.class.guests[broadcasting_name] ||= []
+  end
+
   def broadcasting_name
     @broadcasting_name ||= "appear_#{current_room.slug}"
   end
 
   def transmit_online_guests
-    data = self.class.guests.map do |guest|
+    data = guests.map do |guest|
       {
         id: guest.id,
         avatar: guest.avatar,
