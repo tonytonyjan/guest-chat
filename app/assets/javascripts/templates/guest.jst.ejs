@@ -1,6 +1,6 @@
 <div id="guest_<%= id %>" class="mdl-list__item">
   <span class="mdl-list__item-primary-content">
     <img src="<%= avatar %>" class="mdl-list__item-avatar">
-    <span><%= name %></span>
+    <span<%= isMe ? ' class="guest-self"' : '' %>><%= name %><%= isMe ? '（我）' : '' %></span>
   </span>
 </div>

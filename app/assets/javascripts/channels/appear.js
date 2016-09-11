@@ -1,5 +1,6 @@
 componentHandler.registerUpgradedCallback('MaterialLayout', function(e){
   var room = decodeURIComponent(window.location.pathname.match(/^\/([^/]+)/)[1])
+  var guest_id = document.getElementById('me').childNodes[0].nodeValue
   App.appear = App.cable.subscriptions.create({
     channel: 'AppearChannel',
     room: room
@@ -15,6 +16,7 @@ componentHandler.registerUpgradedCallback('MaterialLayout', function(e){
       if(!Array.isArray(data) && data.action == 'create') data = [data]
       if(Array.isArray(data)){
         var html = data.map(function(msg){
+          msg.isMe = msg.id == guest_id
           return JST['templates/guest'](msg)
         }).reduce(function(previous, current){
           return previous + current

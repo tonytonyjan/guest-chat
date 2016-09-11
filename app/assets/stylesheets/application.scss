@@ -23,7 +23,7 @@
   }
 }
 
-.message-self {
+.message-self, .guest-self {
   color: unquote("rgb(#{$palette-blue-800})");
   font-weight: bold;
 }
