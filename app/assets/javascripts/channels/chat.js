@@ -41,7 +41,9 @@ componentHandler.registerUpgradedCallback('MaterialLayout', function(e){
         content: markdown.toHTML(msg.content),
         time: msg.created_at,
         timeFromNow: moment(msg.created_at).fromNow(),
-        isMe: msg.guest_id == guest_id
+        isMe: msg.guest_id == guest_id,
+        adj: msg.adj,
+        noun: msg.noun
       })
     },
     html_to_ele: function(html){

@@ -32,12 +32,15 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def data_from_message(message)
+    adj, noun = message.guest.name.split(?的)
     {
       guest_id: message.guest.id,
       name: message.guest.name,
       avatar: message.guest.avatar,
       content: message.content,
-      created_at: message.created_at
+      created_at: message.created_at,
+      adj: adj,
+      noun: noun
     }
   end
 end

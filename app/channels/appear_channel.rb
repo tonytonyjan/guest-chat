@@ -23,11 +23,13 @@ class AppearChannel < ApplicationCable::Channel
     unless context == 'create' || context == 'delete'
       raise ArgumentError, ':must be either :create or :delete'
     end
-
+    adj, noun = current_guest.name.split(?的)
     message = {
       id: current_guest.id,
       avatar: current_guest.avatar,
       name: current_guest.name,
+      adj: adj,
+      noun: noun,
       action: context
     }
 
@@ -46,10 +48,13 @@ class AppearChannel < ApplicationCable::Channel
 
   def transmit_online_guests
     data = guests.map do |guest|
+      adj, noun = guest.name.split(?的)
       {
         id: guest.id,
         avatar: guest.avatar,
-        name: guest.name
+        name: guest.name,
+        adj: adj,
+        noun: noun
       }
     end
 
