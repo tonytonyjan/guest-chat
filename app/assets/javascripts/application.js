@@ -30,7 +30,7 @@ componentHandler.registerUpgradedCallback('MaterialLayout', function(e){
   }
 
   function handleKeyPress(e) {
-    if(e.key == 'Enter' && !e.shiftKey){
+    if((e.key == 'Enter' || e.keyCode == 13) && !e.shiftKey){
       e.preventDefault()
       sendMessage()
     }
