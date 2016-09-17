@@ -15,6 +15,20 @@ port        ENV.fetch("PORT") { 3000 }
 #
 environment ENV.fetch("RAILS_ENV") { "development" }
 
+# SSL
+ssl_port = ENV.fetch('SSL_PORT') { ENV.fetch('PORT') { 3000 }.to_i + 1 }
+if ENV.fetch('RAILS_ENV') { 'development' } == 'development'
+  ssl_key = File.expand_path('../cert/server.key', __FILE__)
+  ssl_cert = File.expand_path('../cert/server.crt', __FILE__)
+else
+  ssl_key = ENV.fetch('SSL_KEY')
+  ssl_cert = ENV.fetch('SSL_CERT')
+end
+
+if ssl_key && ssl_cert
+  bind "ssl://0.0.0.0:#{ssl_port}?key=#{ssl_key}&cert=#{ssl_cert}"
+end
+
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
 # the concurrency of the application would be max `threads` * `workers`.
