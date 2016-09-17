@@ -13,7 +13,7 @@ require 'mina/git'
 set :domain, 'chat.tonytonyjan.net'
 set :deploy_to, '/var/www/chat'
 set :repository, 'git@github.com:tonytonyjan/guest-chat.git'
-set :branch, 'v2.0'
+# set :branch, 'v2.0'
 
 # For system-wide RVM install.
 #   set :rvm_path, '/usr/local/rvm/bin/rvm'
