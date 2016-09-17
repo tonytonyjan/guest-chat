@@ -59,4 +59,5 @@ Rails.application.configure do
     g.skip_routes true
     g.jbuilder false
   end
+  config.action_cable.allowed_request_origins = [/.*/]
 end
