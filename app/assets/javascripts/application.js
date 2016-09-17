@@ -2,10 +2,47 @@
 //= require jquery_ujs
 //= require material-design-lite/material
 //= require moment/moment
-//= require moment/locale/zh-tw.js
-//= require markdown/lib/markdown
+//= require moment/locale/zh-tw
+//= require marked/lib/marked
+//= require highlight.pack.js
 //= require_tree ./templates
 //= require cable
+
+var renderer = new marked.Renderer()
+renderer.code = function(code, lang, escaped) {
+  if (this.options.highlight) {
+    var out = this.options.highlight(code, lang);
+    if (out != null && out !== code) {
+      escaped = true;
+      code = out;
+    }
+  }
+  if (!lang) {
+    return '<pre><code class="hljs">'
+      + (escaped ? code : escape(code, true))
+      + '\n</code></pre>';
+  }
+
+  return '<pre><code class="'
+    + this.options.langPrefix
+    + escape(lang, true)
+    + '">'
+    + (escaped ? code : escape(code, true))
+    + '\n</code></pre>\n';
+};
+
+marked.setOptions({
+  breaks: true,
+  sanitize: true,
+  langPrefix: 'hljs ',
+  renderer: renderer,
+  highlight: function(code, lang){
+    if(hljs.getLanguage(lang))
+      return hljs.highlight(lang, code).value
+    else
+      return hljs.highlightAuto(code).value
+  }
+})
 
 componentHandler.registerUpgradedCallback('MaterialLayout', function(e){
   var $form = document.querySelector('.submit-form')
@@ -39,7 +76,7 @@ componentHandler.registerUpgradedCallback('MaterialLayout', function(e){
   function sendMessage(){
     var trimed = $textArea.value.trim()
     if(trimed.length == 0) return
-    App.chat.send({ content: trimed })
+    App.chat.send({ content: $textArea.value })
     $textArea.value = ''
   }
 

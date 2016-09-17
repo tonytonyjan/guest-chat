@@ -40,7 +40,7 @@ componentHandler.registerUpgradedCallback('MaterialLayout', function(e){
       return JST['templates/message']({
         name: msg.name,
         avatar: msg.avatar,
-        content: markdown.toHTML(msg.content),
+        content: marked(msg.content),
         time: msg.created_at,
         timeFromNow: moment(msg.created_at).fromNow(),
         isMe: msg.guest_id == guest_id,

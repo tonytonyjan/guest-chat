@@ -1,5 +1,6 @@
 @import "variables";
 @import "material-design-lite/src/material-design-lite";
+@import "highlight/tomorrow-night";
 
 .submit-form {
   display: flex;
@@ -26,4 +27,8 @@
 .message-self, .guest-self {
   color: unquote("rgb(#{$palette-blue-800})");
   font-weight: bold;
+}
+
+.mdl-list__item-sub-title--align {
+  margin-left: 60px;
 }
