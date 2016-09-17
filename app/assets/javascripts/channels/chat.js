@@ -18,16 +18,18 @@ componentHandler.registerUpgradedCallback('MaterialLayout', function(e){
         })
         this.append_message_from_html(html)
       }else{
-        Notification.requestPermission(function(permission) {
-          if(permission === 'granted' && guest_id != data.guest_id){
-            new Notification(data.name, {
-              body: data.content,
-              icon: data.avatar,
-              tag: data.name,
-              renotify: true
-            })
-          }
-        })
+        if(guest_id != data.guest_id){
+          Notification.requestPermission(function(permission) {
+            if(permission === 'granted'){
+              new Notification(data.name, {
+                body: data.content,
+                icon: data.avatar,
+                tag: data.name,
+                renotify: true
+              })
+            }
+          })
+        }
         var html = this.msg_to_s(data)
         this.append_message_from_html(html)
       }
