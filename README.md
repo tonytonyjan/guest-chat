@@ -15,6 +15,6 @@
 
 ```
 bundle
-npm i
+yarn
 bundle exec puma
 ```
