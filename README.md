@@ -16,5 +16,6 @@
 ```
 bundle
 yarn
+bin/rails db:setup
 bundle exec puma
 ```
